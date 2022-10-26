@@ -13,7 +13,8 @@ const _closeModal = document.querySelector('.modal-close-btn');
 const _modalContainer = document.querySelector('.modal-container');
 
 /**
- * @param {employeeData} employeeData  displays employee data
+ * @param {employeeData} employeeData  grabs the employees information from the API
+ * and displays employee data
  */
 const displayEmployees = (employeeData) => {
 
@@ -52,7 +53,7 @@ fetch(_randomUser)
 
 //console.log(_employees);
 /**
- * 
+ * Displays the card window when you click on each card
  * @param {index} index 
  */
 
@@ -61,8 +62,10 @@ function displayModal(index) {
     let { name, dob, phone, email, location: { city, street, state, postcode
     }, picture } = _employees[index];
     let date = new Date(dob.date);
+    date.toLocaleDateString();
     const _modalInfo = document.querySelector('.modal-info-container');
     _modalInfo.innerHTML = '';
+    const month = String(date.getMonth() + 1).padStart(2, '0');
 
     const _modalHtml = `
     <img class="modal-img" src="${picture.large}" />
@@ -73,8 +76,7 @@ function displayModal(index) {
     <hr />
     <p>${phone}</p>
     <p class="modal-text">${street.number} ${street.name}, ${state} ${postcode}</p>
-    <p>Birthday:
-    ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+    <p>Birthday:  ${month}/${date.getDate()}/${date.getFullYear()}</p>
     </div>
     `;
     _modalInfo.innerHTML = _modalHtml; 
