@@ -19,14 +19,14 @@ const displayEmployees = (employeeData) => {
 
     let _html = '';
 
-    // loop through each employee and create HTML markup
+    // loops through each employee and creates the HTML markup
     employeeData.forEach((employee, index) => {
     _employees.push(employee);
     let name = employee.name;
     let email = employee.email;
     let city = employee.location.city;
     let picture = employee.picture;
-    // template literals
+    // template literals that get injected into my HTML file
     _html += `
     <div class="card" data-index="${index}">
     <div class="card-img-container">
@@ -41,8 +41,7 @@ const displayEmployees = (employeeData) => {
   `
   });
     _gallery.innerHTML = _html;
-
-    console.log(_employees);
+    //console.log(_employees);
 } 
 // fetches data from API
 fetch(_randomUser)
@@ -79,7 +78,6 @@ function displayModal(index) {
     </div>
     `;
     _modalInfo.innerHTML = _modalHtml; 
-  
     }
 /**
  * Eventlisterner on the card class gets triggered with a click
@@ -99,25 +97,4 @@ function displayModal(index) {
 */
     _closeModal.addEventListener('click', () => {
       _modalContainer.style.display = 'none';
-      // overlay.classList.add("hidden");
     });
-
-
-
-    // <div class="modal-container">
-    // <div class="modal">
-    //     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-    //     <div class="modal-info-container">
-
-
-
-    //         <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-    //         <h3 id="name" class="modal-name cap">name</h3>
-    //         <p class="modal-text">email</p>
-    //         <p class="modal-text cap">city</p>
-    //         <hr>
-    //         <p class="modal-text">(555) 555-5555</p>
-    //         <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-    //         <p class="modal-text">Birthday: 10/21/2015</p>
-    //     </div>
-    // </div>
