@@ -8,8 +8,9 @@ let _employees = [];
 const _randomUser =`https://randomuser.me/api/?results=12&inc=name, picture,
 email, location, phone, dob &noinfo &nat=US` ;
 const _gallery = document.querySelector('#gallery');
-let card = document.querySelector('.card');
-const modalClose = document.querySelector('.modal-close-btn')
+let _card = document.querySelector('.card');
+const _closeModal = document.querySelector('.modal-close-btn');
+const _modalContainer = document.querySelector('.modal-container');
 
 /**
  * @param {employeeData} employeeData  displays employee data
@@ -61,8 +62,10 @@ function displayModal(index) {
     let { name, dob, phone, email, location: { city, street, state, postcode
     }, picture } = _employees[index];
     let date = new Date(dob.date);
+    const _modalInfo = document.querySelector('.modal-info-container');
+    _modalInfo.innerHTML = '';
 
-    const modalHTML = `
+    const _modalHtml = `
     <img class="modal-img" src="${picture.large}" />
     <div class="modal-info-container">
     <h2 class="modal-text">${name.first} ${name.last}</h2>
@@ -70,31 +73,32 @@ function displayModal(index) {
     <p class="modal-text">${city}</p>
     <hr />
     <p>${phone}</p>
-    <p class="modal-text">${street}, ${state} ${postcode}</p>
+    <p class="modal-text">${street.number} ${street.name}, ${state} ${postcode}</p>
     <p>Birthday:
     ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
     </div>
     `;
-    overlay.classList.remove("hidden");
-    modalContainer.innerHTML = modalHTML;
+    _modalInfo.innerHTML = _modalHtml; 
+  
     }
 /**
- * 
+ * Eventlisterner on the card class gets triggered with a click
  */
     _gallery.addEventListener('click', e => {
       // click is not on the modal-container
-      if (e.target !== modal-container) {
-      // select the card element based on its proximity to actual element
-      clicked
-      const card = e.target.closest(".card");
-      const index = card.getAttribute('data-index');
+      if (e.target !== _gallery) {
+      // select the card element based on its proximity to actual element clicked
+      const _card = e.target.closest(".card");
+      const index = _card.getAttribute('data-index');
       displayModal(index);
+      _modalContainer.style.display = 'block';
       }
-      });
+     });
 /**
-  * 
+* Modal eventListener 
 */
-    modalClose.addEventListener('click', () => {
+    _closeModal.addEventListener('click', () => {
+      _modalContainer.style.display = 'none';
       // overlay.classList.add("hidden");
     });
 
