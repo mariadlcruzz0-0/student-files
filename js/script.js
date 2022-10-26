@@ -3,12 +3,17 @@
  * Public-API-Request
  */
 
+//Global scope variables
 let _employees = [];
 const _randomUser =`https://randomuser.me/api/?results=12&inc=name, picture,
 email, location, phone, dob &noinfo &nat=US` ;
 const _gallery = document.querySelector('#gallery');
-const card = document.querySelector('.card');
+let card = document.querySelector('.card');
+const modalClose = document.querySelector('.modal-close-btn')
 
+/**
+ * @param {employeeData} employeeData  displays employee data
+ */
 const displayEmployees = (employeeData) => {
 
     let _html = '';
@@ -38,8 +43,7 @@ const displayEmployees = (employeeData) => {
 
     console.log(_employees);
 } 
-
-// fetch data from API
+// fetches data from API
 fetch(_randomUser)
 .then(res => res.json())
 .then(res => res.results)
@@ -47,6 +51,10 @@ fetch(_randomUser)
 .catch(err => console.log(err))
 
 //console.log(_employees);
+/**
+ * 
+ * @param {index} index 
+ */
 
 function displayModal(index) {
     // use object destructuring make our template literal cleaner
@@ -55,14 +63,14 @@ function displayModal(index) {
     let date = new Date(dob.date);
 
     const modalHTML = `
-    <img class="avatar" src="${picture.large}" />
-    <div class="text-container">
-    <h2 class="name">${name.first} ${name.last}</h2>
-    <p class="email">${email}</p>
-    <p class="address">${city}</p>
+    <img class="modal-img" src="${picture.large}" />
+    <div class="modal-info-container">
+    <h2 class="modal-text">${name.first} ${name.last}</h2>
+    <p class="modal-text">${email}</p>
+    <p class="modal-text">${city}</p>
     <hr />
     <p>${phone}</p>
-    <p class="address">${street}, ${state} ${postcode}</p>
+    <p class="modal-text">${street}, ${state} ${postcode}</p>
     <p>Birthday:
     ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
     </div>
@@ -70,7 +78,25 @@ function displayModal(index) {
     overlay.classList.remove("hidden");
     modalContainer.innerHTML = modalHTML;
     }
-
+/**
+ * 
+ */
+    _gallery.addEventListener('click', e => {
+      // click is not on the modal-container
+      if (e.target !== modal-container) {
+      // select the card element based on its proximity to actual element
+      clicked
+      const card = e.target.closest(".card");
+      const index = card.getAttribute('data-index');
+      displayModal(index);
+      }
+      });
+/**
+  * 
+*/
+    modalClose.addEventListener('click', () => {
+      // overlay.classList.add("hidden");
+    });
 
 
 
@@ -78,6 +104,9 @@ function displayModal(index) {
     // <div class="modal">
     //     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
     //     <div class="modal-info-container">
+
+
+
     //         <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
     //         <h3 id="name" class="modal-name cap">name</h3>
     //         <p class="modal-text">email</p>
